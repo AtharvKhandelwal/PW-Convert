@@ -1,0 +1,55 @@
+<header class="app-header">
+  <mat-toolbar class="nav" color="primary">
+    <div class="logo">
+      <img src="Prattandwhitney.png" alt="logo" class="logo-img" />
+      <span class="logo-text">P&W: <strong>Convertify</strong></span>
+    </div>
+
+    <span class="spacer"></span>
+
+    <div class="nav-right">
+      <a routerLink="/" class="nav-link" matTooltip="Home">
+        <mat-icon class="nav-icon">home</mat-icon>
+      </a>
+
+      <a routerLink="/signup" class="nav-link" matTooltip="Signup">
+        <mat-icon class="nav-icon">person_add</mat-icon>
+      </a>
+
+      <a routerLink="/login" class="nav-link" matTooltip="Login">
+        <mat-icon class="nav-icon">login</mat-icon>
+      </a>
+
+      <div *ngIf="username" class="welcome-text">
+        Welcome, <strong>{{ username }}</strong>!
+      </div>
+
+      <mat-icon 
+        *ngIf="username" 
+        class="nav-icon logout-icon" 
+        (click)="logoutFunction()" 
+        matTooltip="Logout">
+        exit_to_app
+      </mat-icon>
+    </div>
+  </mat-toolbar>
+</header>
+
+
+<!-- Main Content Section -->
+<div class="app-container">
+  <main class="app-content">
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="app-footer">
+    <mat-toolbar color="primary">
+      <div class="footer-content">
+        <p>&copy; 2025 P&W ConverTech. All rights reserved.</p>
+      </div>
+    </mat-toolbar>
+  </footer>
+</div>
