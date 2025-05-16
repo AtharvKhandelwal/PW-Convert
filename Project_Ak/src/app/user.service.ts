@@ -82,5 +82,32 @@ export class UserService {
     });
   }
   
+  convertExcelToPdf(file: File): Observable<Blob> {
+    const formData = new FormData();
+    formData.append('file', file);
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${localStorage.getItem('token')}` // // Add your token here
+    // });
+    return this.http.post(`${this.apiUrl}/Features/ConvertExcelToPdf`, formData, {
+      responseType: 'blob' 
+    });
+  }
+
+  convertPdfToWord(file: File): Observable<Blob> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/Features/ConvertPdfToWord`, formData, {
+      responseType: 'blob'
+    });
+  }
+
+  convertJpgToPdf(file: File): Observable<Blob> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(`${this.apiUrl}/Features/ConvertJpgToPdf`, formData, {
+      responseType: 'blob'
+    });
+  }
+
 }
 

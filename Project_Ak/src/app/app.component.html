@@ -2,7 +2,7 @@
   <mat-toolbar class="nav" color="primary">
     <div class="logo">
       <img src="Prattandwhitney.png" alt="logo" class="logo-img" />
-      <span class="logo-text">P&W: <strong>Convertify</strong></span>
+      <span class="logo-text">P&W:<strong>Document Converter</strong></span>
     </div>
 
     <span class="spacer"></span>
@@ -35,21 +35,23 @@
   </mat-toolbar>
 </header>
 
-
-<!-- Main Content Section -->
+<!-- Full height scrollable content container -->
 <div class="app-container">
   <main class="app-content">
     <div class="container">
       <router-outlet></router-outlet>
     </div>
   </main>
-
-  <!-- Footer Section -->
-  <footer class="app-footer">
-    <mat-toolbar color="primary">
-      <div class="footer-content">
-        <p>&copy; 2025 P&W ConverTech. All rights reserved.</p>
+<!-- Footer Section -->
+<footer class="app-footer">
+  <mat-toolbar color="primary" class="footer-toolbar">
+    <div class="footer-content">
+      <div class="footer-links">
+        <a routerLink="/about" class="footer-link" matTooltip="About Us">About Us</a>
+        <a routerLink="/contact" class="footer-link" matTooltip="Contact Us">Contact Us</a>
       </div>
-    </mat-toolbar>
-  </footer>
+      <p class="copyright-text">&copy; 2025 P&W ConverTech. All rights reserved.</p>
+    </div>
+  </mat-toolbar>
+</footer>
 </div>

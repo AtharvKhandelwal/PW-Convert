@@ -1,10 +1,23 @@
 /* General Layout */
-body, html {
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
   font-family: 'Segoe UI', sans-serif;
   background-color: #f4f6f9;
   color: #2c3e50;
+}
+
+/* Layout Container */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-content {
+  flex: 1;
+  padding-bottom: 40px; /* Ensure space above footer */
 }
 
 /* Header/Nav */
@@ -47,7 +60,6 @@ body, html {
   align-items: center;
   font-size: 24px; 
   font-weight: 600; 
-  /* color: #333;  */
   letter-spacing: 1px; 
   text-transform: capitalize; 
   padding: 0 15px;
@@ -92,21 +104,51 @@ body, html {
   color: #f7c600;
 }
 
-/* Footer */
-.app-footer {
+/* Footer */.app-footer {
   background-color: #003366;
   color: #ffffff;
   text-align: center;
   padding: 16px 0;
-  position: fixed;
-  bottom: 0;
   width: 100%;
+  /* position: fixed; */
+  /* margin-top: 100vh;
+  bottom: 0; */
   font-size: 0.9rem;
+  margin-top: auto;
 }
 
-/* Utility */
-.spacer {
-  flex: 1 1 auto;
+.footer-toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  margin-bottom: 8px;
+}
+
+.footer-link {
+  color: #003366;
+  text-decoration: none;
+  margin: 0 12px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #f7c600;
+}
+
+.copyright-text {
+  margin: 0;
+  font-size: 0.85rem;
 }
 
 /* Responsive */
@@ -121,5 +163,11 @@ body, html {
 
   .welcome-text {
     display: none;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 }

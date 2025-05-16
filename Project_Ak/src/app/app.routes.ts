@@ -8,6 +8,11 @@ import { ConvertPdfToPowerpointComponent} from './Components/convert-pdf-to-powe
 import { ConvertPptToPdfComponent } from './Components/convert-ppt-to-pdf/convert-ppt-to-pdf.component';
 import { ConvertWORDToPDFComponent } from './Components/convert-word-to-pdf/convert-word-to-pdf.component';
 import { PdfToJpgComponent } from './Components/convert-pdf-to-jpg/convert-pdf-to-jpg.component';
+import { ConvertExcelToPdfComponent } from './Components/convert-excel-to-pdf/convert-excel-to-pdf.component';
+import { ConvertPdfToWordComponent } from './Components/convert-pdf-to-word/convert-pdf-to-word.component';
+import { ConvertJpgToPdfComponent } from './Components/convert-jpg-to-pdf/convert-jpg-to-pdf.component';
+import { AboutComponent } from './Components/about/about.component';
+import { ContactComponent } from './Components/contact/contact.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },  // Default route
@@ -18,4 +23,9 @@ export const routes: Routes = [
   { path: 'ppttopdf', component: ConvertPptToPdfComponent, canActivate: [authGuard]},
   { path: 'wordtopdf', component: ConvertWORDToPDFComponent, canActivate: [authGuard]},
   { path: 'pdftojpg', component: PdfToJpgComponent, canActivate: [authGuard]},
+  { path: 'exceltopdf', component: ConvertExcelToPdfComponent, canActivate: [authGuard] },
+  { path: 'pdftoword', component: ConvertPdfToWordComponent, canActivate: [authGuard] },
+  { path: 'jpgtopdf', component: ConvertJpgToPdfComponent, canActivate: [authGuard] },
+  { path: 'about', component: AboutComponent },
+  { path: 'contact', component: ContactComponent },
 ];
