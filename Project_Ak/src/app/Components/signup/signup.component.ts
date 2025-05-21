@@ -37,10 +37,13 @@ export class SignupComponent {
     private snackBar: MatSnackBar
   ) {
     // Initialize the form with validation
+    const emailRegex = /^[a-zA-Z0-9._%+-]{3,30}@[a-zA-Z0-9.-]{1,18}\.[a-zA-Z]{2,}$/;
+    // const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
     this.signupForm = this.fb.group(
       {
-        username: ['', [Validators.required, Validators.minLength(4)]],
-        email: ['', [Validators.required, Validators.email]],
+        username: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(20)]],
+        email: ['', [Validators.required, Validators.pattern(emailRegex)]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]]
       },

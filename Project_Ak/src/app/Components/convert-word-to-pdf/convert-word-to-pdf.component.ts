@@ -1,28 +1,46 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { UserService } from '../../user.service'; // Adjust path if different
+import { UserService } from '../../user.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-convert-word-to-pdf',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './convert-word-to-pdf.component.html',
-  styleUrl: './convert-word-to-pdf.component.css'
+  styleUrls: ['./convert-word-to-pdf.component.css']
 })
 export class ConvertWORDToPDFComponent {
   selectedFile: File | null = null;
   loading = false;
   errorMessage: string | null = null;
-  pdfFileUrl: string | null = null; // To store the PDF file URL
-  pdfFileName: string | null = null; // To store the PDF file name
-  
+  pdfFileUrl: string | null = null;
+  pdfFileName: string | null = null;
 
   constructor(private userService: UserService) {}
 
-  
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
+
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
+      const file = input.files[0];
+      const validTypes = [
+        'application/msword',
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      ];
+
+      if (!validTypes.includes(file.type)) {
+        this.errorMessage = 'Only Word documents (.doc, .docx) are allowed.';
+        this.selectedFile = null;
+        return;
+      }
+
+      if (file.size > 10 * 1024 * 1024) {
+        this.errorMessage = 'File is too large. Max allowed size is 10MB.';
+        this.selectedFile = null;
+        return;
+      }
+
+      this.selectedFile = file;
       this.errorMessage = null;
     }
   }
@@ -34,22 +52,20 @@ export class ConvertWORDToPDFComponent {
     }
 
     this.loading = true;
+    this.errorMessage = null;
 
     this.userService.convertWordToPdf(this.selectedFile).subscribe({
       next: (response) => {
-        // Handle the successful conversion (response is the Blob)
+        if (this.pdfFileUrl) {
+          window.URL.revokeObjectURL(this.pdfFileUrl); // Cleanup previous URL
+        }
+
         const blob = response;
         this.pdfFileUrl = window.URL.createObjectURL(blob);
-        this.pdfFileName = 'converted.pdf'; // You can change this based on your preference (e.g., dynamically generate it)
-        // const a = document.createElement('a');
-        // a.href = url;
-        // a.download = 'converted.pdf';
-        // a.click();
-        // window.URL.revokeObjectURL(url);
+        this.pdfFileName = this.selectedFile!.name.replace(/\.(docx?|DOCX?)$/, '.pdf');
         this.loading = false;
       },
       error: (err) => {
-        // Handle error properly
         if (err.error instanceof Blob) {
           this.errorMessage = 'Error converting file. Please try again.';
         } else {
@@ -59,5 +75,4 @@ export class ConvertWORDToPDFComponent {
       }
     });
   }
-
 }

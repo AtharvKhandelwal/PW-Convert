@@ -39,8 +39,10 @@ export class LoginComponent {
     private userService: UserService,
     private cdr: ChangeDetectorRef
   ) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]{3,30}@[a-zA-Z0-9.-]{1,18}\.[a-zA-Z]{2,}$/;
+
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.pattern(emailRegex)]],
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
