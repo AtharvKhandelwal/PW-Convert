@@ -64,7 +64,6 @@ export class UserService {
     });
   }
   
-
   convertPptToPdf(file: File): Observable<Blob> {
     const formData = new FormData();
     formData.append('file', file);
@@ -85,9 +84,6 @@ export class UserService {
   convertExcelToPdf(file: File): Observable<Blob> {
     const formData = new FormData();
     formData.append('file', file);
-    // const headers = new HttpHeaders({
-    //   'Authorization': `Bearer ${localStorage.getItem('token')}` // // Add your token here
-    // });
     return this.http.post(`${this.apiUrl}/Features/ConvertExcelToPdf`, formData, {
       responseType: 'blob' 
     });
